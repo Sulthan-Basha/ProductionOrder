@@ -41,14 +41,64 @@ scratch. This page gets rid of all links and provides the needed markup only.
     .product-order tbody tr.active td {
         background-color: #99a1b3; color:#fff;
     }
-    .tilldate {border: 1px solid rgba(0,0,0,.125); border-radius: 4px; -webkit-box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.07); box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.07); margin-bottom:20px; background-color:#fff; padding:7px; overflow:hidden;}
+	.update-status {padding:5px 13px; font-size:12px;}
+	.product-order tbody tr td i {font-size:20px; }
+	.product-order tbody tr.priority {background-color:#ff000040; }
+    .tilldate {border: 1px solid rgba(0,0,0,.125); min-height: 75px; border-radius: 4px; -webkit-box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.07); box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.07); margin-bottom:20px; background-color:#fff; padding:7px; overflow:hidden;}
     .tilldate .icon {width: 50px; height: 50px; border-radius: 50px; color: #fff; font-size: 25px; float: left; text-align: center; padding: 10px 0; margin:3px 0;}
     .tilldate .iconinfo {float:left; margin-left:20px;}
-    .tilldate .iconinfo h2 {margin-top:5px; margin-bottom:0px; color:#4f5467; font-size:21px;}
-    .tilldate .iconinfo h4 {margin-bottom: 0; font-size: 15px; color: #99a1b3; margin-top: -7px;}
+    .tilldate .iconinfo h2 {margin-top:5px; margin-bottom:0px; color:#4f5467; font-size:18px;}
+	.tilldate .iconinfo h2 span {font-size:10px; }
+    .tilldate .iconinfo h4 {margin-bottom: 0; font-size: 14px; color: #99a1b3; margin-top: -7px;}
     .printed-bg {background-color: #0073b7;}
     .completed-bg {background-color:#00a65a;}
     .sftprinted-bg { background-color:#e48c00;}
+	.cancelled-bg { background-color:#e20000;}
+	.checkbox {padding-left:10px;}
+	.checkbox label {padding-left:17px;}
+	#main-table a{color: #797979;
+    font-weight: 500;
+    text-decoration: underline;}
+	.timer-controls {position: absolute;
+    top: -5px;
+    right: 70px;}
+	#StepPopup .modal-header {padding:22px 15px; overflow:hidden;}
+	#StepPopup .modal-header h3 {margin-bottom:0px; }
+	#StepPopup .modal-header p {font-size: 13px;color: #00b30e;font-weight: 500;}
+	.help-text {font-size:12px; color:#000; margin-top:5px; margin-left:2px; }
+	#StepPopup .modal-body .form-group {margin-bottom:5px; }
+	@media (min-width: 576px) {
+		#BatchDetails .modal-dialog {
+			max-width: 50%;
+			margin: 30px auto;
+		}
+	}
+	@media (min-width: 576px) {
+		#CreateBatch .modal-dialog {
+			max-width: 40%;
+			margin: 30px auto;
+		}
+	}
+	.ml-20 {margin-left:20px;}
+	.mt-30 {margin-top:30px;}
+	.mt-10 {margin-top:10px;}
+	#BatchDetails p {margin-bottom:5px;}
+	#BatchDetails label {padding-top:2px;}
+	.masterimage {overflow:hidden;}
+	.blueprint {overflow:hidden;}
+	.masterimage img, .blueprint img { border:1px solid #f5f5f5; padding:5px;}
+	.update-status i { font-size:16px; background-color:#4f5467; color:#fff; }
+	.update-status {border-radius:4px;}
+	.form-group {overflow:hidden; margin-bottom:6.5px;}
+	
+	.main-image {position:relative; overflow:hidden; }
+	.itemnumber-image {position:absolute;top:0px; left:0px; z-index:9; }
+	@media (min-width: 576px) {
+		#BatchImage .modal-dialog {
+			max-width: 75%;
+			margin: 30px auto;
+		}
+	}
 </style>
 </head>
 
@@ -329,120 +379,288 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="panel-wrapper">
                                     <div class="panel-body collectionitemsedit">
                                       <div class="col-md-12">
-                                        <h4 class="pull-left">Orders Till Date</h4>
+                                        <h4 class="pull-left">Today's Numbers</h4>
                                         <button type="button" class="btn update-status pull-right" id="ProductionHistory">Production History</button>
                                       </div>
 
                                       <div class="col-md-12 nopaddingleft nopaddingright">
-                                        <div class="col-md-6">
-                                          <div class="col-md-4">
-                                              <div class="tilldate">
-                                                  <div class="icon printed-bg">
-                                                      <i class="ti-printer"></i>
-                                                  </div>
-                                                  <div class="iconinfo">
-                                                      <h2>253</h2>
-                                                      <h4>Printed</h4>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="col-md-4">
-                                              <div class="tilldate">
-                                                  <div class="icon completed-bg">
-                                                      <i class="ti-check-box"></i>
-                                                  </div>
-                                                  <div class="iconinfo">
-                                                      <h2>85</h2>
-                                                      <h4>Completed</h4>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="col-md-4">
-                                              <div class="tilldate">
-                                                  <div class="icon sftprinted-bg">
-                                                      <i class="ti-fullscreen"></i>
-                                                  </div>
-                                                  <div class="iconinfo">
-                                                      <h2>1200</h2>
-                                                      <h4>SFT Printed</h4>
-                                                  </div>
-                                              </div>
-                                          </div>
+                                        <div class="col-md-12 col-lg-12 col-xs-12 col-xs-12">
+											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon cancelled-bg">
+														  <i class="ti-na"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>25/5 <span>(No. of Pieces/No. of Items)</span></h2>
+														  <h4>Cancelling in 3 Days</h4>
+													  </div>
+												  </div>
+											  </div>
+											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon printed-bg">
+														  <i class="ti-printer"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>600</h2>
+														  <h4>Pieces Printed</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon completed-bg">
+														  <i class="ti-check-box"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>321</h2>
+														  <h4>Pieces Transferred OH</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon printed-bg">
+														  <i class="ti-printer"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>157</h2>
+														  <h4>Items Printed</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon completed-bg">
+														  <i class="ti-check-box"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>115</h2>
+														  <h4>Items Transferred OH</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon sftprinted-bg">
+														  <i class="ti-fullscreen"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>1200</h2>
+														  <h4>SFT Printed</h4>
+													  </div>
+												  </div>
+											  </div>
                                         </div>
                                       </div>
                                       <div class="col-md-12" id="Show_Hide_History">
-                                          <div class="col-md-6">
-                                              <h4>Weekly Average</h4>
-                                              <div class="col-md-4">
-                                                  <div class="tilldate">
-                                                      <div class="icon printed-bg">
-                                                          <i class="ti-printer"></i>
-                                                      </div>
-                                                      <div class="iconinfo">
-                                                          <h2>632</h2>
-                                                          <h4>Printed</h4>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="col-md-4">
-                                                  <div class="tilldate">
-                                                      <div class="icon completed-bg">
-                                                          <i class="ti-check-box"></i>
-                                                      </div>
-                                                      <div class="iconinfo">
-                                                          <h2>582</h2>
-                                                          <h4>Completed</h4>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="col-md-4">
-                                                  <div class="tilldate">
-                                                      <div class="icon sftprinted-bg">
-                                                          <i class="ti-fullscreen"></i>
-                                                      </div>
-                                                      <div class="iconinfo">
-                                                          <h2>3219</h2>
-                                                          <h4>SFT Printed</h4>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="col-md-6">
-                                              <h4>Monthly Average</h4>
-                                              <div class="col-md-4">
-                                                  <div class="tilldate">
-                                                      <div class="icon printed-bg">
-                                                          <i class="ti-printer"></i>
-                                                      </div>
-                                                      <div class="iconinfo">
-                                                          <h2>2636</h2>
-                                                          <h4>Printed</h4>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="col-md-4">
-                                                  <div class="tilldate">
-                                                      <div class="icon completed-bg">
-                                                          <i class="ti-check-box"></i>
-                                                      </div>
-                                                      <div class="iconinfo">
-                                                          <h2>2184</h2>
-                                                          <h4>Completed</h4>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                              <div class="col-md-4">
-                                                  <div class="tilldate">
-                                                      <div class="icon sftprinted-bg">
-                                                          <i class="ti-fullscreen"></i>
-                                                      </div>
-                                                      <div class="iconinfo">
-                                                          <h2>8654</h2>
-                                                          <h4>SFT Printed</h4>
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          </div>
+                                          <div class="col-md-12 col-lg-12 col-xs-12 col-xs-12 nopaddingleft nopaddingright">
+											<h4>Weekly Average</h4>
+											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon cancelled-bg">
+														  <i class="ti-na"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>25/5 <span>(No. of Pieces/No. of Items)</span></h2>
+														  <h4>Cancelling in 3 Days</h4>
+													  </div>
+												  </div>
+											  </div>
+											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon printed-bg">
+														  <i class="ti-printer"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>600</h2>
+														  <h4>Pieces Printed</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon completed-bg">
+														  <i class="ti-check-box"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>321</h2>
+														  <h4>Pieces Transferred OH</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon printed-bg">
+														  <i class="ti-printer"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>157</h2>
+														  <h4>Items Printed</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon completed-bg">
+														  <i class="ti-check-box"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>115</h2>
+														  <h4>Items Transferred OH</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon sftprinted-bg">
+														  <i class="ti-fullscreen"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>1200</h2>
+														  <h4>SFT Printed</h4>
+													  </div>
+												  </div>
+											  </div>
+                                        </div>
+                                          <div class="col-md-12 col-lg-12 col-xs-12 col-xs-12">
+											<h4>Monthly Average</h4>
+											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon cancelled-bg">
+														  <i class="ti-na"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>25/5 <span>(No. of Pieces/No. of Items)</span></h2>
+														  <h4>Cancelling in 3 Days</h4>
+													  </div>
+												  </div>
+											  </div>
+											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon printed-bg">
+														  <i class="ti-printer"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>600</h2>
+														  <h4>Pieces Printed</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon completed-bg">
+														  <i class="ti-check-box"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>321</h2>
+														  <h4>Pieces Transferred OH</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon printed-bg">
+														  <i class="ti-printer"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>157</h2>
+														  <h4>Items Printed</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon completed-bg">
+														  <i class="ti-check-box"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>115</h2>
+														  <h4>Items Transferred OH</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon sftprinted-bg">
+														  <i class="ti-fullscreen"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>1200</h2>
+														  <h4>SFT Printed</h4>
+													  </div>
+												  </div>
+											  </div>
+                                        </div>
+										<div class="col-md-12 col-lg-12 col-xs-12 col-xs-12">
+											<h4>Year-to-Date</h4>
+											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon cancelled-bg">
+														  <i class="ti-na"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>25/5 <span>(No. of Pieces/No. of Items)</span></h2>
+														  <h4>Cancelling in 3 Days</h4>
+													  </div>
+												  </div>
+											  </div>
+											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon printed-bg">
+														  <i class="ti-printer"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>600</h2>
+														  <h4>Pieces Printed</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon completed-bg">
+														  <i class="ti-check-box"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>321</h2>
+														  <h4>Pieces Transferred OH</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon printed-bg">
+														  <i class="ti-printer"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>157</h2>
+														  <h4>Items Printed</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon completed-bg">
+														  <i class="ti-check-box"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>115</h2>
+														  <h4>Items Transferred OH</h4>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+												  <div class="tilldate">
+													  <div class="icon sftprinted-bg">
+														  <i class="ti-fullscreen"></i>
+													  </div>
+													  <div class="iconinfo">
+														  <h2>1200</h2>
+														  <h4>SFT Printed</h4>
+													  </div>
+												  </div>
+											  </div>
+                                        </div>
                                       </div>
                                       <div class="bg-title">
                                         <h4 class="page-title">Print Priority List </h4>
@@ -451,26 +669,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <div class="order-status">
                                             <div class="radio radio-theme">
                                                 <input type="radio" name="radio" id="yesstart" value="yesstart">
-                                                <label for="yesstart"> Yet-to-Start </label>
+                                                <label for="yesstart"> Yet-to-Start&nbsp;(10)</label>
                                             </div>
                                             <div class="radio radio-theme left-align">
-                                                <input type="radio" name="radio" id="pending" value="pending">
-                                                <label for="pending"> Pending </label>
+                                                <input type="radio" name="radio" id="inprogress" value="inprogress">
+                                                <label for="inprogress"> In Progress&nbsp;(1)</label>
                                             </div>
                                             <div class="radio radio-theme left-align">
                                                 <input type="radio" name="radio" id="completed" value="completed">
-                                                <label for="completed"> Completed </label>
+                                                <label for="completed"> Completed&nbsp;(2)</label>
                                             </div>
                                             <div class="radio radio-theme left-align">
                                                 <input type="radio" name="radio" id="all" value="all" checked>
-                                                <label for="all"> All </label>
+                                                <label for="all"> All&nbsp;(13)</label>
                                             </div>
                                         </div>
                                         </div>
                                         <div class="col-md-6">
+											
                                             <div class="pull-right table-search">
                                                 <form role="search" class="app-search pull-left">
-                                                    <input type="text" placeholder="Search..." class="form-control">
+                                                    <input type="text" placeholder="Search..." class="form-control" style="margin-left:10px;">
                                                     <a href="">
                                                         <i class="fa fa-search"></i>
                                                     </a>
@@ -478,104 +697,114 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <button type="button" class="btn btn-custom btn-circle" title="" data-toggle="tooltip" data-original-title="Filter">
                                                     <i class="ti-filter"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-custom btn-circle" title="" data-toggle="tooltip" data-original-title="Reset">
+                                                <button type="button" class="btn btn-custom btn-circle" title="" data-toggle="tooltip" data-original-title="Refresh">
                                                     <i class="ti-loop"></i>
                                                 </button>
                                             </div>
+											<button type="button" class="fcbtn btn btn-outline btn-primary btn-1c pull-right" data-toggle="modal" data-target="#CreateBatch">Create Batch</button>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div>
                                             <div class="table-responsive">
+												
                                                 <table class="table MarginTop10 table-striped table-bordered table-hover product-order">
                                                     <thead>
+														<!--th>Change Priority</th-->
                                                         <th>Image</th>
-                                                        <th scope="col">Item#</th>
+                                                        <th scope="col">Item#/Batch#</th>
                                                         <th scope="col">Description</th>
-                                                        <th scope="col">PO#</th>
+														<th scope="col">OH&nbsp;Qty</th>
+														<th scope="col">Bin#</th>
+                                                        <th scope="col">PRD#</th>
+														<th scope="col">Request&nbsp;Date</th>
                                                         <th scope="col">Cancel&nbsp;Date</th>
-                                                        <th scope="col">Request&nbsp;Date</th>
                                                         <th scope="col">Item&nbsp;Size</th>
                                                         <th scope="col">Whites</th>
-                                                        <th scope="col">Total&nbsp;Qty</th>
+                                                        <th scope="col">Order&nbsp;Qty</th>
                                                         <th scope="col">Qty&nbsp;to&nbsp;Print</th>
                                                         <th scope="col">Case&nbsp;Pack</th>
                                                         <th scope="col">Customers</th>
-                                                        <th scope="col">Op Type</th>
+                                                        <th scope="col">Operation Completed</th>
                                                         <th scope="col">Status</th>
-                                                        <th scope="col" style="width:100px;">Actions</th>
+                                                        <th scope="col" style="width:150px;">Actions</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
+                                                        <tr class="priority">
                                                             <td>
-                                                                <img src="images/37024.jpg" class="" />
+                                                                <img src="images/37024.jpg" class="" data-toggle="modal" data-target="#BatchImage" />
                                                             </td>
                                                             <td>13885</td>
-                                                            <td>My Fav Item</td>
+                                                            <td>Let's Stay Home Wall Plaque</td>
+															<td>121</td>
+															<td>A04116A</td>
                                                             <td>12345</td>
+															<td>21/03/2019</td>
                                                             <td>30/03/2019</td>
-                                                            <td>21/03/2019</td>
                                                             <td>14x14</td>
                                                             <td>Yes</td>
-
                                                             <td>100</td>
                                                             <td>40</td>
                                                             <td>12</td>
                                                             <td>Multiple</td>
-                                                            <td>Basic Printing</td>
+                                                            <td></td>
                                                             <td>
-                                                                <span class="badge badge-success">Inprogress</span>
+                                                                
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn update-status" data-toggle="modal" data-target="#AddItembyUPC">Start</button>
+                                                                <button type="button" class="btn update-status" data-toggle="modal" data-target="#StepPopup">Start</button>
+																<button type="button" class="btn update-status">Pause</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
-                                                                <img src="images/37040.jpg" class="" />
+                                                                <a href="#"><img src="images/masterimage.jpg" data-toggle="modal" data-target="#BatchImage" /></a>
                                                             </td>
-                                                            <td>13865</td>
-                                                            <td>My Fav Item</td>
-                                                            <td>12345</td>
+                                                            <td><a href="#" data-toggle="modal" data-target="#BatchDetails"><u><b>B72364</b></u></a></td>
+                                                            <td>Multiple Items</td>
+															<td></td>
+															<td></td>
+                                                            <td>32653</td>
+															<td>12/03/2019</td>
                                                             <td>31/03/2019</td>
-                                                            <td>12/03/2019</td>
-                                                            <td>18x14</td>
+                                                            <td>14x14</td>
                                                             <td>Yes</td>
-
                                                             <td>200</td>
                                                             <td>70</td>
                                                             <td>8</td>
                                                             <td>Multiple</td>
-                                                            <td>Assembly with Printing</td>
+                                                            <td>Pack</td>
                                                             <td>
-                                                                <span class="badge badge-primary">Pending</span>
+                                                                <span class="badge badge-success">Completed</span>
                                                             </td>
                                                             <td>
                                                                 <button type="button" class="btn update-status">Start</button>
+																<button type="button" class="btn update-status">Pause</button>
                                                             </td>
                                                         </tr>
                                                         <tr class="active">
                                                             <td>
-                                                                <img src="images/37057.jpg" class="" />
+                                                                <img src="images/nomasterimage.jpg" class="" />
                                                             </td>
-                                                            <td>13877</td>
-                                                            <td>My Fav Item</td>
-                                                            <td>12345</td>
+                                                            <td><a href="#" data-toggle="modal" data-target="#NoBatchDetails"><u><b>B23633</b></u></a></td></td>
+                                                            <td>Multiple Items</td>
+															<td></td>
+															<td></td>
+                                                            <td>76523</td>
+															<td>12/03/2019</td>
                                                             <td class="red">12/09/2019</td>
-                                                            <td>12/03/2019</td>
                                                             <td>12x12</td>
                                                             <td>Yes</td>
-
                                                             <td>300</td>
                                                             <td>100</td>
                                                             <td>14</td>
                                                             <td>Multiple</td>
-                                                            <td>Basic Printing</td>
+                                                            <td>Print</td>
                                                             <td>
-                                                                <span class="badge badge-danger">Completed</span>
+                                                                <span class="badge badge-primary">Inprogress</span>
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn update-status">Start</button>
+                                                                <button type="button" class="btn update-status" style="color:#ccc !important;" disabled>Start</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -583,23 +812,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                                 <img src="images/37072.jpg" class="" />
                                                             </td>
                                                             <td>13888</td>
-                                                            <td>My Fav Item</td>
+                                                            <td>Wall Plaque</td>
+															<td>72</td>
+															<td>A03235A</td>
                                                             <td>12345</td>
+															<td>17/03/2019</td>
                                                             <td>15/04/2019</td>
-                                                            <td>17/03/2019</td>
                                                             <td>25x25</td>
                                                             <td>Yes</td>
-
                                                             <td>200</td>
                                                             <td>30</td>
                                                             <td>6</td>
                                                             <td>Multiple</td>
-                                                            <td>Assembly with Printing</td>
+                                                            <td>Pack</td>
                                                             <td>
-                                                                <span class="badge badge-success">Inprogress</span>
+                                                                <span class="badge badge-success">Completed</span>
                                                             </td>
                                                             <td>
                                                                 <button type="button" class="btn update-status">Start</button>
+																<button type="button" class="btn update-status">Pause</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -607,23 +838,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                                 <img src="images/37040.jpg" class="" />
                                                             </td>
                                                             <td>13899</td>
-                                                            <td>My Fav Item</td>
+                                                            <td>Wall Plaque</td>
+															<td>421</td>
+															<td>A05224A</td>
                                                             <td>12345</td>
+															<td>11/03/2019</td>
                                                             <td>29/04/2019</td>
-                                                            <td>11/03/2019</td>
                                                             <td>18x14</td>
                                                             <td>Yes</td>
-
                                                             <td>600</td>
                                                             <td>250</td>
                                                             <td>10</td>
                                                             <td>Multiple</td>
-                                                            <td>Assembly with Printing</td>
+                                                            <td></td>
                                                             <td>
-                                                                <span class="badge badge-success">Inprogress</span>
+                                                                
                                                             </td>
                                                             <td>
                                                                 <button type="button" class="btn update-status">Start</button>
+																<button type="button" class="btn update-status">Pause</button>
                                                             </td>
                                                         </tr>
                                                 </table>
@@ -631,9 +864,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </div>
                                         <div class="col-md-12 nopaddingleft nopaddingright">
                                             <div class="form-group col-md-6 MarginTop15 nopaddingleft nopaddingright showrows">
-                                                <label class="control-label col-md-2 align-middle">Show Rows: </label>
-                                                <div class="col-md-2">
-                                                    <select class="form-control">
+                                                <label class="control-label pull-left align-middle">Show Rows: </label>
+                                                    <select class="form-control pull-left" style="margin-left:10px;">
                                                         <option value="">5</option>
                                                         <option value="">10</option>
                                                         <option value="">20</option>
@@ -641,7 +873,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <option value="">100</option>
                                                         <option value="">All</option>
                                                     </select>
-                                                </div>
 
                                             </div>
                                             <div class="col-md-6 MarginTop15 nopaddingleft nopaddingright">
@@ -670,13 +901,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </div>
                                 </div>
                             </div>
+							<div class="col-md-7 col-lg-7 col-sm-12 col-xs-12">
                             <div class="panel panel-inverse">
                                 <div class="panel-heading">Production Details</div>
                                 <div class="panel-wrapper">
                                     <div class="panel-body collectionitemsedit">
-
-                                        <div>
-                                            <div class="table-responsive" aria="hidden"></div>
                                             <div class="table-responsive">
                                                 <table id="main-table" class="table MarginTop10 table-striped table-bordered table-hover">
                                                     <thead>
@@ -695,7 +924,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <tr>
                                                           <td>1</td>
                                                           <td>Print</td>
-
                                                           <td>STRA1</td>
                                                           <td>28/03/2019</td>
                                                           <td></td>
@@ -706,7 +934,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <tr>
                                                           <td>2</td>
                                                           <td>Put Back & Labels</td>
-
                                                           <td>STRA2</td>
                                                           <td>05/04/2019</td>
                                                           <td></td>
@@ -717,7 +944,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                       <tr>
                                                           <td>3</td>
                                                           <td>Pack</td>
-
                                                           <td>STRA3</td>
                                                           <td>04/04/2019</td>
                                                           <td></td>
@@ -725,28 +951,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                           <td>400</td>
                                                           <td>Jessie</td>
                                                       </tr>
-                                                      <tr>
-                                                          <td>4</td>
-                                                          <td>Print</td>
-
-                                                          <td>STRA4</td>
-                                                          <td>03/04/2019</td>
-                                                          <td></td>
-                                                          <td>120</td>
-                                                          <td>260</td>
-                                                          <td>James</td>
-                                                      </tr>
-                                                      <tr>
-                                                          <td>5</td>
-                                                          <td>Put Back & Labels</td>
-
-                                                          <td>STRA5</td>
-                                                          <td>02/04/2019</td>
-                                                          <td></td>
-                                                          <td>60</td>
-                                                          <td>180</td>
-                                                          <td>Jock</td>
-                                                      </tr>
+                                                      
                                                     </tbody>
                                                     <!-- <tfoot>
                                                       <tr>
@@ -762,12 +967,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </tfoot> -->
                                                 </table>
                                             </div>
-                                        </div>
                                         <div class="col-md-12 nopaddingleft nopaddingright">
                                             <div class="form-group col-md-6 MarginTop15 nopaddingleft nopaddingright showrows">
-                                                <label class="control-label col-md-2 align-middle">Show Rows: </label>
-                                                <div class="col-md-2">
-                                                    <select class="form-control">
+                                                <label class="control-label pull-left align-middle">Show Rows: </label>
+                                                    <select class="form-control pull-left" style="margin-left:10px;">
                                                         <option value="">5</option>
                                                         <option value="">10</option>
                                                         <option value="">20</option>
@@ -775,7 +978,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <option value="">100</option>
                                                         <option value="">All</option>
                                                     </select>
-                                                </div>
 
                                             </div>
                                             <div class="col-md-6 MarginTop15 nopaddingleft nopaddingright">
@@ -804,179 +1006,561 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </div>
                                 </div>
                             </div>
+							</div>
+							
+							<div class="col-md-5 col-lg-5 col-sm-12 col-xs-12">
+                            <div class="panel panel-inverse">
+                                <div class="panel-heading">Run Cycle Details for Item# 13865</div>
+                                <div class="panel-wrapper">
+                                    <div class="panel-body collectionitemsedit">
+                                            <div class="table-responsive">
+											<div class="col-md-12 col-lg-12 col-xs-12 colsm-12 nopaddingleft nopaddingright">
+                                            <div class="order-status pull-right">
+                                            <div class="radio radio-theme">
+                                                <input type="radio" name="radio" id="print" value="yesstart" checked>
+                                                <label for="print"> Print </label>
+                                            </div>
+                                            <div class="radio radio-theme left-align">
+                                                <input type="radio" name="radio" id="putlabels" value="inprogress">
+                                                <label for="putlabels"> Put Labels </label>
+                                            </div>
+                                            <div class="radio radio-theme left-align">
+                                                <input type="radio" name="radio" id="cornershooks" value="completed">
+                                                <label for="cornershooks"> Corners & Hooks </label>
+                                            </div>
+                                            <div class="radio radio-theme left-align">
+                                                <input type="radio" name="radio" id="all" value="all">
+                                                <label for="all"> All </label>
+                                            </div>
+                                        </div>
+                                        </div>
+												<table class="table MarginTop10 table-striped table-bordered table-hover">
+																	<thead>
+																		<tr>
+																			<th scope="col">Step Name</th>
+																			<th scope="col">Run&nbsp;Cycle&nbsp;Qty</th>
+																			<th scope="col">Start&nbsp;Time</th>
+																			<th scope="col">End&nbsp;Time</th>
+																			<th scope="col">Defect&nbsp;Qty</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr>
+																			<td scope="col">Print</td>
+																			<td scope="col">20</td>
+																			<td scope="col">00:00:00</td>
+																			<td scope="col">1:25:00</td>
+																			<td scope="col"></td>
+																		</tr>
+																		<tr>
+																			<td scope="col">Print</td>
+																			<td scope="col">20</td>
+																			<td scope="col">1:27:00</td>
+																			<td scope="col">1:50:00</td>
+																			<td scope="col"><a href="#"><u>2</u></a></td>
+																		</tr>
+																		<tr>
+																			<td scope="col">Print</td>
+																			<td scope="col">20</td>
+																			<td scope="col">1:55:00</td>
+																			<td scope="col">2:25:00</td>
+																			<td scope="col"></td>
+																		</tr>
+																		<tr>
+																			<td scope="col">Print</td>
+																			<td scope="col">20</td>
+																			<td scope="col">00:00:00</td>
+																			<td scope="col">1:25:00</td>
+																			<td scope="col"></td>
+																		</tr>
+																	</tbody>
+																</table>
+											</div>
+											<div class="col-md-12 nopaddingleft nopaddingright">
+                                            <div class="form-group col-md-6 MarginTop15 nopaddingleft nopaddingright showrows">
+                                                <label class="control-label pull-left align-middle">Show Rows: </label>
+                                                    <select class="form-control pull-left" style="margin-left:10px;">
+                                                        <option value="">5</option>
+                                                        <option value="">10</option>
+                                                        <option value="">20</option>
+                                                        <option value="">50</option>
+                                                        <option value="">100</option>
+                                                        <option value="">All</option>
+                                                    </select>
 
+                                            </div>
+                                            <div class="col-md-6 MarginTop15 nopaddingleft nopaddingright">
+                                                <nav data-pagination class="pull-right">
+                                                    <a href=# disabled>
+                                                        <i class="fa fa-chevron-left"></i>
+                                                    </a>
+                                                    <ul>
+                                                        <li class=current>
+                                                            <a href=#1>1</a>
+                                                            <li>
+                                                                <a href=#2>2</a>
+                                                                <li>
+                                                                    <a href=#3>3</a>
+                                                                    <li>
+                                                                        <a href=#4>4</a>
+                                                                        <li>
+                                                                            <a href=#5>5</a>
+                                                    </ul>
+                                                    <a href=#2>
+                                                        <i class="fa fa-chevron-right"></i>
+                                                    </a>
+                                                </nav>
+                                            </div>
+                                        </div>
+									</div>
+								</div>
+							</div>
+							</div>
                         </div>
                     </div>
                 </div>
-                <div id="AddItembyUPC" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
+                <div id="StepPopup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-md">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title text-left" id="vcenter">Operation Steps</h4>
+                                <h4 class="modal-title pull-left" id="vcenter">Operation Steps</h4>
+								<div class="clearfix">
+                                        <div class="timer-controls pull-right">
+											<h3>00:00:00</h3>
+											<p style="">Printing in Progress...</p>
+                                        </div>
                                 <button type="button" class="close modal-cloase" data-dismiss="modal" aria-hidden="true">
                                     <i class="fa fa-times"></i>
                                 </button>
                             </div>
+							</div>
                             <div class="modal-body">
-                                <div class="col-md-6">
-                                    <p><strong>Item: 13885</strong></p>
-                                    <p>Resin Deer Gets Hunter</p>
-                                    <p><strong>In Stock:</strong> 148</p>
-                                    <p><strong>Item Measures:</strong>  5.25" x 3.5" x 7"</p>
+								<div class="col-md-12">
+										<div class="col-md-4">
+											<p style="font-size:18px;font-weight: 500; margin-bottom:3px;">13885</p>
+											<p>Resin Deer Gets Hunter</p>
+										</div>
+										<div class="col-md-3">
+											<p><strong>Qty Ordered:</strong> 100</p>
+											<p><strong>Case Pack:</strong> 20</p>
+										</div>
+										<div class="col-md-5">
+											<p><strong>Qty Transered OH:</strong>  50</p>
+											<p><strong>Item Measures:</strong>  14" x 3.5" x 14"</p>
+										</div>
+									</div>
+									<div class="clearfix"></div>
+									<hr class="hr-line"/>
+								<div class="col-md-6">
+                                    <div style="padding-bottom: 15px;">
+                                        <img src="images/13885.jpg" class="img-responsive">
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                        <div style="padding-bottom: 15px;">
-                                            <img src="images/13885.jpg" class="" style="width:110px;">
-                                        </div>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="col-md-12">
-
-                                <div class="form-group col-md-6" style="margin-top:11px;">
-                                        <label class="control-label">Step No: </label>
+                                <div class="form-group col-md-12">
+                                        <label class="control-label">Step#: </label>
                                         <select id="Newitem" class="form-control">
                                             <option value="">Step-1 (Printing)</option>
                                             <option value="">Step-2 (Put Back & Labels)</option>
                                             <option value="">Step-3 (Pack)</option>
                                         </select>
+										<p class="help-text"><span class="red">32 Needed</span>/68 Completed</p>
                                     </div>
-                                    <div class="form-group col-md-6" style="margin-top:11px;">
+                                    <div class="form-group col-md-12">
                                         <label class="control-label">Printers/Resources: </label>
                                         <select id="Newitem" class="form-control">
                                             <option value="">STRA1</option>
                                             <option value="">STRA2</option>
                                             <option value="">STRA3</option>
                                         </select>
+										<div class="checkbox checkbox-theme">
+                                                <input type="checkbox" name="checkbox" id="defaultforsession" value="packingnotneeded">
+                                                <label for="defaultforsession"> Use as Default for Session </label>
+                                         </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Run/Cycle No:
+                                    <div class="form-group col-md-12 nopaddingleft nopaddingright">
+										<div class="form-group col-md-6">
+											<label class="control-label">Run/Cycle No:
+                                            <!-- <sup class="required">*</sup> -->
+											</label>
+											<input type="text" class="form-control" value="1" disabled/>
+											
+										</div>
+										<div class="form-group col-md-6">
+											<label class="control-label">Job Qty:</label>
+											<input type="number" class="form-control" />
+											
+										</div>
+										<div class="checkbox checkbox-theme pull-left" style="margin-top:2px;">
+                                                <input type="checkbox" name="checkbox" id="packingnotneeded" value="packingnotneeded">
+                                                <label for="packingnotneeded"> Packing Needed </label>
+											</div>
+											<a href="#" id="HaveDefects" class="pull-right"><u>Have Defects ?</u></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" id="ShowDefects">
+									<h4 class="text-center">Defects in Run# 3 for 13885</h4>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Defective Qty:
+                                            </label>
+                                            <input type="text" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="control-label">Defect Reason: </label>
+                                            <select id="Newitem" class="form-control">
+                                                <option value="">Breaked</option>
+                                                <option value="">Item not printed Properly</option>
+                                            </select>
+                                        </div>
+										<div class="form-group col-md-4">
+                                            <label class="control-label">Note:
+                                            </label>
+                                            <textarea class="form-control" style="height:40px;"></textarea>
+                                        </div>
+										<div class="col-md-12 text-center center-block" style="margin-top:5px;">
+											<button type="button" class="fcbtn btn btn-outline btn-primary btn-1c">Add</button>
+											<button type="button" class="fcbtn btn btn-outline btn-primary btn-1c">Cancel</button>
+										</div>
+                                </div>
+                                <div class="clearfix"></div>
+									<div class="col-md-12" id="ShowTransferFields">
+                                    <div class="form-group col-md-3">
+                                        <label class="control-label">Transfer Qty:
                                             <!-- <sup class="required">*</sup> -->
                                         </label>
-                                        <input type="text" class="form-control" value="1"/>
+                                        <input type="text" class="form-control"/>
                                         <!-- <p class="help-txt">Max 3 Characters</p> -->
                                     </div>
 
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Job Qty:</label>
-                                        <input type="number" class="form-control" />
+                                    <div class="form-group col-md-4">
+                                        <label class="control-label">Bin#:</label>
+                                        <input type="text" class="form-control" value="A04116A" />
+										<!--p class="help-text">Instruction to Anil: Show Default Bin#</p-->
                                     </div>
-                                    <div>
-                                        <input id="start" name="controls" type="radio" />
-                                        <input id="stop" name="controls" type="radio" />
-                                        <input id="reset" name="controls" type="radio" />
-                                        <div class="timer-controls">
-                                            <label for="start">Start</label>
-                                            <!-- <label for="stop">Pause</label> -->
-                                            <!-- <label for="reset">Refresh</label> -->
-                                        </div>
-                                        <div class="timer" style="float: right;position: absolute;right: 14px;top: 145px;">
-                                            <div class="cell">
-                                                <div class="numbers tenhour moveten">0 1 2 3 4 5 6 7 8 9</div>
-                                            </div>
-                                            <div class="cell">
-                                                <div class="numbers hour moveten">0 1 2 3 4 5 6 7 8 9</div>
-                                            </div>
-                                            <div class="cell divider">
-                                                <div class="numbers">:</div>
-                                            </div>
-                                            <div class="cell">
-                                                <div class="numbers tenminute movesix">0 1 2 3 4 5 6</div>
-                                            </div>
-                                            <div class="cell">
-                                                <div class="numbers minute moveten">0 1 2 3 4 5 6 7 8 9</div>
-                                            </div>
-                                            <div class="cell divider">
-                                                <div class="numbers">:</div>
-                                            </div>
-                                            <div class="cell">
-                                                <div class="numbers tensecond movesix">0 1 2 3 4 5 6</div>
-                                            </div>
-                                            <div class="cell">
-                                                <div class="numbers second moveten">0 1 2 3 4 5 6 7 8 9</div>
-                                            </div>
-                                            <div class="cell divider">
-                                                <div class="numbers">.</div>
-                                            </div>
-                                            <div class="cell">
-                                                <div class="numbers millisecond moveten">0 1 2 3 4 5 6 7 8 9</div>
-                                            </div>
-                                            <div class="cell">
-                                                <div class="numbers tenmillisecond moveten">0 1 2 3 4 5 6 7 8 9</div>
-                                            </div>
-                                            <div class="cell">
-                                                <div class="numbers hundredmillisecond moveten">0 1 2 3 4 5 6 7 8 9</div>
-                                            </div>
-                                        </div>
-
-
-                                        <div style="font-size: 15px;color: #0a6f56;font-weight: 500;padding-left:8px;">
-                                            <p>Printing in Progress...</p>
-                                        </div>
+									<div class="col-md-5" style="padding-top:25px;">
+                                        <button type="button" class="fcbtn btn btn-outline btn-primary btn-1c">Transer Now</button>
+										<button type="button" class="fcbtn btn btn-outline btn-primary btn-1c">Cancel</button>
                                     </div>
-                                    <hr class="hr-line"/>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Defective Qty:
-                                        </label>
-                                        <input type="text" class="form-control" />
+								</div>
+								
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Defect Reason: </label>
-                                        <select id="Newitem" class="form-control">
-                                            <option value="">Breaked</option>
-                                            <option value="">Item not printed Properly</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-
-
-
-
-                            </div>
-                            <div class="modal-footer text-center center-block">
-                                <button type="button" class="fcbtn btn btn-outline btn-primary btn-1c" data-dismiss="modal">Job Completed</button>
+							 <div class="modal-footer text-center center-block" style="margin-bottom:15px;">
+								<button type="button" class="fcbtn btn btn-outline btn-primary btn-1c">Start Run</button>
+                                <button type="button" class="fcbtn btn btn-outline btn-primary btn-1c" data-dismiss="modal">End Run</button>
+								<button type="button" class="fcbtn btn btn-outline btn-primary btn-1c" id="TransfertoHand">Transfer On Hand</button>
                                 <button type="button" class="fcbtn btn btn-outline btn-primary btn-1c" data-dismiss="modal">Cancel</button>
                                 <!-- <button class="fcbtn btn btn-outline btn-primary btn-1c" data-dismiss="modal" type="button">Close</button> -->
+								<!--p class="text-center">Disable rest of the buttons when transfer on hand button clicked.</p-->
+								<!--p class="text-center">Disable Transfer on Hand button when Have Defects button clicked.</p-->
                             </div>
+                            </div>
+                           
                         </div>
                         <!-- /.modal-content -->
                     </div>
                     <!-- /.modal-dialog -->
                 </div>
+				
+				<div id="BatchDetails" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+								<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+									<h4 class="modal-title pull-left" id="vcenter">Batch#: B72364</h4>
+								</div>
+								<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+									<h4 class="modal-title pull-left" id="vcenter">Batch&nbsp;Size: 14" X 14"</h4>
+								</div>
+								<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+									<h4 class="modal-title pull-left" id="vcenter">Printer/Resource: STRA1</h4>
+								</div>
+                                
+								<button type="button" class="close modal-cloase" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+								
+							</div>
+                            <div class="modal-body">
+								<div class="col-md-12" style="margin-bottom:10px;">
+									<div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 blueprint">
+										<h5>Blue Print Image:</h5>
+										<img src="images/blueprint.jpg" class="img-responsive"/>
+										
+									</div>
+									<div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 masterimage">
+										<h5>Master Image:</h5>
+										<img src="images/masterimage.jpg" class="img-responsive"/>
+									</div>
+									<div class="col-md-12 text-center center-block nopaddingleft nopaddingright">
+											<button type="button" class="btn update-status" style="margin:15px 0;">Edit/Upload Image</button>
+											<button type="button" class="btn update-status" style="margin:15px 0;">Add Items to Batch</button>
+										</div>
+									
+									<div class="col-md-4 col-lg-4 col-sm-6 col-xs-12 mt-30">
+										<div class="form-group ml-20">
+											<label class="pull-left">No. of Items in Batch:&nbsp;</label>
+											<p class="pull-left">4</p>
+										</div>
+										<div class="form-group ml-20">
+											<label class="pull-left">No. of Pieces in Batch:&nbsp;</label>
+											<p class="pull-left">15</p>
+										</div>
+										<div class="form-group ml-20">
+											<label class="pull-left">Cancel Date:&nbsp;</label>
+											<p class="pull-left">09/20/2020</p>
+										</div>
+										<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 text-center center-block">
+											
+										</div>
+									</div>
+								</div>
+								<div class="table-responsive">
+                                                <table id="main-table" class="table MarginTop10 table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+															<th scope="col">PRD#</th>
+															<th scope="col">Image</th>
+                                                            <th scope="col">Item#</th>
+                                                            <th scope="col">Description</th>
+															<th scope="col">OH&nbsp;Qty</th>
+															<th scope="col">Bin#</th>
+															<th scope="col">Order&nbsp;Qty</th>
+															<th scope="col">Case&nbsp;Pack</th>
+															<th scope="col">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+														<td>32653</td>
+                                                          <td><img src="images/37057.jpg" class="img-responsive"/></td>
+														  <td>37057</td>
+														  <td>Wall Plaque</td>
+														  <td>2</td>
+														  <td>A06233A</td>
+														  <td>5</td>
+														  <td>12</td>
+														  <td><button type="button" class="btn update-status"><i class="fa fa-trash"></i></button></td>
+                                                      </tr>
+													  <tr>
+														<td>12576</td>
+                                                          <td><img src="images/37040.jpg" class="img-responsive"/></td>
+														  <td>37040</td>
+														  <td>Heart Wall Plaque</td>
+														  <td>6</td>
+														  <td>A02468A</td>
+														  <td>2</td>
+														  <td>12</td>
+														  <td><button type="button" class="btn update-status"><i class="fa fa-trash"></i></button></td>
+                                                      </tr>
+													  <tr>
+														<td>73233</td>
+                                                          <td><img src="images/37072.jpg" class="img-responsive"/></td>
+														  <td>37072</td>
+														  <td>Wood I Would Wall Plaque</td>
+														  <td>1</td>
+														  <td>A05122A</td>
+														  <td>8</td>
+														  <td>12</td>
+														  <td><button type="button" class="btn update-status"><i class="fa fa-trash"></i></button></td>
+                                                      </tr>
+                                                      
+                                                    </tbody>
+                                                    <!-- <tfoot>
+                                                      <tr>
+                                                        <th>Footer 1</th>
+                                                        <td>Footer 2</td>
+                                                        <td>Footer 3</td>
+                                                        <td>Footer 4</td>
+                                                        <td>Footer 5</td>
+                                                        <td>Footer 6</td>
+                                                        <td>Footer 7</td>
+                                                        <td>Footer 8</td>
+                                                      </tr>
+                                                    </tfoot> -->
+                                                </table>
+                                            </div>
+                            </div>
+							<div class="col-md-12 text-center center-block">
+								<button type="button" class="fcbtn btn btn-outline btn-primary btn-1c" data-dismiss="modal" style="margin-bottom:20px;">Cancel</button>
+							</div>
+							 
+                            </div>
+                           
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+					
+					
+					<div id="BatchImage" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+								<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+									<h4 class="modal-title pull-left" id="vcenter">Batch#: B72364</h4>
+								</div>
+								<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+									<h4 class="modal-title pull-left" id="vcenter">Batch&nbsp;Size: 14" X 14"</h4>
+								</div>
+								<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+									<h4 class="modal-title pull-left" id="vcenter">Printer/Resource: STRA1</h4>
+								</div>
+                                
+								<button type="button" class="close modal-cloase" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+								
+							</div>
+                            <div class="modal-body">
+								<img src="images/masterimage.jpg" class="main-image img-responsive"/>
+								<img src="images/itemnumber.jpg" class="itemnumber-image img-responsive"/>
+                            </div>
+							<div class="col-md-12 text-center center-block">
+								<button type="button" class="fcbtn btn btn-outline btn-primary btn-1c" data-dismiss="modal" style="margin-bottom:20px;">Cancel</button>
+							</div>
+							 
+                            </div>
+                           
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+					
+					
+					<div id="CreateBatch" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-md">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title pull-left" id="vcenter">Create Batch</h4>
+								<button type="button" class="close modal-cloase" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+								
+							</div>
+                            <div class="modal-body">
+							<h4>Select Items:</h4>
+								<div class="table-responsive">
+                                                <table class="table MarginTop10 table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+															<th scope="col">
+																<div class="checkbox checkbox-theme" style="margin:0;">
+																	<input type="checkbox" name="checkbox" id="defaultforsession" value="packingnotneeded">
+																	<label for="defaultforsession"></label>
+															 </div>
+															</th>
+															<th scope="col">Image</th>
+															<th scope="col">PRD#</th>
+                                                            <th scope="col">Item#</th>
+                                                            <th scope="col">Description</th>
+															<th scope="col">Item&nbsp;Size</th>
+															<th scope="col">Order&nbsp;Qty</th>
+															<th scope="col">Bin#</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                      <tr>
+														<td>
+															<div class="checkbox checkbox-theme">
+																	<input type="checkbox" name="checkbox" id="defaultforsession" value="packingnotneeded">
+																	<label for="defaultforsession"></label>
+															 </div>
+														</td>
+                                                          <td><img src="images/37057.jpg" class="img-responsive"/></td>
+														  <td>37057</td>
+														  <td>32653</td>
+														  <td>Wall Plaque</td>
+														  <td>14" X 14"</td>
+														  <td>5</td>
+														  <td>A06233A</td>
+                                                      </tr>
+													  <tr>
+														<td>
+															<div class="checkbox checkbox-theme">
+																	<input type="checkbox" name="checkbox" id="defaultforsession" value="packingnotneeded">
+																	<label for="defaultforsession"></label>
+															 </div>
+														</td>
+														
+                                                          <td><img src="images/37040.jpg" class="img-responsive"/></td>
+														  <td>12576</td>
+														  <td>37040</td>
+														  <td>Heart Wall Plaque</td>
+														  <td>14" X 14"</td>
+														  <td>2</td>
+														  <td>A02468A</td>
+                                                      </tr>
+													  <tr>
+														<td>
+															<div class="checkbox checkbox-theme">
+																	<input type="checkbox" name="checkbox" id="defaultforsession" value="packingnotneeded">
+																	<label for="defaultforsession"></label>
+															 </div>
+														</td>
+														
+                                                          <td><img src="images/37072.jpg" class="img-responsive"/></td>
+														  <td>73233</td>
+														  <td>37072</td>
+														  <td>Wood I Would Wall Plaque</td>
+														  <td>14" X 14"</td>
+														  <td>8</td>
+														  <td>A05122A</td>
+                                                      </tr>
+													  <tr>
+														<td>
+															<div class="checkbox checkbox-theme">
+																	<input type="checkbox" name="checkbox" id="defaultforsession" value="packingnotneeded">
+																	<label for="defaultforsession"></label>
+															 </div>
+														</td>
+														
+                                                          <td><img src="images/37072.jpg" class="img-responsive"/></td>
+														  <td>52342</td>
+														  <td>38331</td>
+														  <td>Wood I Would Wall Plaque</td>
+														  <td>24" X 14"</td>
+														  <td>8</td>
+														  <td>A05122A</td>
+                                                      </tr>
+                                                      
+                                                    </tbody>
+                                                    <!-- <tfoot>
+                                                      <tr>
+                                                        <th>Footer 1</th>
+                                                        <td>Footer 2</td>
+                                                        <td>Footer 3</td>
+                                                        <td>Footer 4</td>
+                                                        <td>Footer 5</td>
+                                                        <td>Footer 6</td>
+                                                        <td>Footer 7</td>
+                                                        <td>Footer 8</td>
+                                                      </tr>
+                                                    </tfoot> -->
+                                                </table>
+                                            </div>
+											<div class="form-group col-md-12 nopaddingleft nopaddingright mt-10">
+												<div class="col-md-3 nopaddingleft nopaddingright">
+													<label class="control-label mt-10">Select Printer/Resource: </label>
+												</div>
+												<div class="col-md-4 nopaddingleft nopaddingright">
+													<select id="SelectPrinter" class="form-control">
+														<option value="">STRA1</option>
+														<option value="">STRA2</option>
+														<option value="">STRA3</option>
+														<option value="">STRA4</option>
+													</select>
+												</div>
+											</div>
+                            </div>
+							<div class="col-md-12 text-center center-block">
+								<button type="button" class="fcbtn btn btn-outline btn-primary btn-1c" data-dismiss="modal" style="margin-bottom:20px;">Create Batch</button>
+								<button type="button" class="fcbtn btn btn-outline btn-primary btn-1c" data-dismiss="modal" style="margin-bottom:20px;">Cancel</button>
+							</div>
+							 
+                            </div>
+                           
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+			
+				
             </div>
             <!-- /.container-fluid -->
             <footer class="footer text-center"> 2018 &copy; All rights reserved. YIS 6.0 </footer>
         </div>
         <!-- /#page-wrapper -->
-    </div>
-    <div id="AddItembyUPC" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="vcenter" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title text-center" id="vcenter">Add Items for Collection</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        <i class="fa fa-times"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label class="control-label">Enter UPC / Item#:
-                                <sup class="required">*</sup>
-                            </label>
-                            <input type="text" class="form-control" />
-                            <i class="fa fa-times"></i>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer text-center center-block">
-                    <button class="fcbtn btn btn-outline btn-primary btn-1c" data-dismiss="modal" type="button">Close</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
     </div>
     <!-- /#wrapper -->
     <script src="js/jquery.min.js"></script>
@@ -1042,6 +1626,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
         });
     </script>
+	<script>
+		$(document).ready(function(){
+			$('#ShowTransferFields').hide();
+            $('#TransfertoHand').click(function(){
+                $('#ShowTransferFields').slideDown();
+            });
+		});
+	</script>
+	<script>
+		$(document).ready(function(){
+			$('#ShowDefects').hide();
+            $('#HaveDefects').click(function(){
+                $('#ShowDefects').slideDown();
+            });
+		});
+	</script>
 </body>
 
 </html>
