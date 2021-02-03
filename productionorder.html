@@ -91,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	.update-status {border-radius:4px;}
 	.form-group {overflow:hidden; margin-bottom:6.5px;}
 	
-	.main-image {position:relative; overflow:hidden; }
+	.main-image {position:absolute;  }
 	.itemnumber-image {position:absolute;top:0px; left:0px; z-index:9; }
 	@media (min-width: 576px) {
 		#BatchImage .modal-dialog {
@@ -99,6 +99,50 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			margin: 30px auto;
 		}
 	}
+	
+	#BatchImage .modal-body{overflow:hidden; height:720px;}
+	.itemnumber-image {
+    position: absolute;
+    top: 10px;
+    left: 13px;
+    z-index: 9;
+}
+
+@media (max-width: 424px) {
+	.itemnumber-image {
+    width: 90%;
+}
+.main-image {width:90%;  }
+#BatchImage .modal-body{ height:170px;}
+}
+
+@media only screen and (min-width: 425px) and (max-width: 991px) {
+	.itemnumber-image {
+   top: 14px;
+    left: 15px; width:95%;
+}
+.main-image { width:95% }
+#BatchImage .modal-body{ height:320px;}
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1439px) {
+	.itemnumber-image {
+   top: 14px;
+    left: 15px; width:95%;
+}
+.main-image { width:95% }
+#BatchImage .modal-body{ height:400px;}
+}
+
+@media only screen and (min-width: 1440px) and (max-width: 1800px) {
+	.itemnumber-image {
+   top: 12px;
+    left: 14px; width:97%;
+}
+.main-image { width:97% }
+#BatchImage .modal-body{ height:550px;}
+}
+
 </style>
 </head>
 
@@ -382,10 +426,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <h4 class="pull-left">Today's Numbers</h4>
                                         <button type="button" class="btn update-status pull-right" id="ProductionHistory">Production History</button>
                                       </div>
-
+										<div class="clearfix"></div>
                                       <div class="col-md-12 nopaddingleft nopaddingright">
                                         <div class="col-md-12 col-lg-12 col-xs-12 col-xs-12">
-											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											<div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon cancelled-bg">
 														  <i class="ti-na"></i>
@@ -396,7 +440,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											<div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon printed-bg">
 														  <i class="ti-printer"></i>
@@ -407,7 +451,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon completed-bg">
 														  <i class="ti-check-box"></i>
@@ -418,7 +462,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon printed-bg">
 														  <i class="ti-printer"></i>
@@ -429,7 +473,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon completed-bg">
 														  <i class="ti-check-box"></i>
@@ -440,7 +484,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon sftprinted-bg">
 														  <i class="ti-fullscreen"></i>
@@ -456,7 +500,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <div class="col-md-12" id="Show_Hide_History">
                                           <div class="col-md-12 col-lg-12 col-xs-12 col-xs-12 nopaddingleft nopaddingright">
 											<h4>Weekly Average</h4>
-											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											<div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon cancelled-bg">
 														  <i class="ti-na"></i>
@@ -467,7 +511,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											<div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon printed-bg">
 														  <i class="ti-printer"></i>
@@ -478,7 +522,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon completed-bg">
 														  <i class="ti-check-box"></i>
@@ -489,7 +533,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon printed-bg">
 														  <i class="ti-printer"></i>
@@ -500,7 +544,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon completed-bg">
 														  <i class="ti-check-box"></i>
@@ -511,7 +555,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon sftprinted-bg">
 														  <i class="ti-fullscreen"></i>
@@ -525,7 +569,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </div>
                                           <div class="col-md-12 col-lg-12 col-xs-12 col-xs-12">
 											<h4>Monthly Average</h4>
-											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											<div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon cancelled-bg">
 														  <i class="ti-na"></i>
@@ -536,7 +580,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											<div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon printed-bg">
 														  <i class="ti-printer"></i>
@@ -547,7 +591,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon completed-bg">
 														  <i class="ti-check-box"></i>
@@ -558,7 +602,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon printed-bg">
 														  <i class="ti-printer"></i>
@@ -569,7 +613,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon completed-bg">
 														  <i class="ti-check-box"></i>
@@ -580,7 +624,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon sftprinted-bg">
 														  <i class="ti-fullscreen"></i>
@@ -594,7 +638,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </div>
 										<div class="col-md-12 col-lg-12 col-xs-12 col-xs-12">
 											<h4>Year-to-Date</h4>
-											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											<div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon cancelled-bg">
 														  <i class="ti-na"></i>
@@ -605,7 +649,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											<div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											<div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon printed-bg">
 														  <i class="ti-printer"></i>
@@ -616,7 +660,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon completed-bg">
 														  <i class="ti-check-box"></i>
@@ -627,7 +671,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon printed-bg">
 														  <i class="ti-printer"></i>
@@ -638,7 +682,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon completed-bg">
 														  <i class="ti-check-box"></i>
@@ -649,7 +693,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													  </div>
 												  </div>
 											  </div>
-											  <div class="col-md-2 col-lg-2 col-sm-4 col-xs-12">
+											  <div class="col-md-6 col-lg-4 col-sm-4 col-xs-12 pull-left">
 												  <div class="tilldate">
 													  <div class="icon sftprinted-bg">
 														  <i class="ti-fullscreen"></i>
@@ -665,7 +709,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                       <div class="bg-title">
                                         <h4 class="page-title">Print Priority List </h4>
                                       </div>
-                                        <div class="col-md-6 nopaddingleft nopaddingright">
+                                        <div class="col-md-6 nopaddingleft nopaddingright pull-left">
                                             <div class="order-status">
                                             <div class="radio radio-theme">
                                                 <input type="radio" name="radio" id="yesstart" value="yesstart">
@@ -685,7 +729,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </div>
                                         </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 pull-left">
 											
                                             <div class="pull-right table-search">
                                                 <form role="search" class="app-search pull-left">
@@ -1408,7 +1452,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							</div>
                             <div class="modal-body">
 								<img src="images/masterimage.jpg" class="main-image img-responsive"/>
-								<img src="images/itemnumber.jpg" class="itemnumber-image img-responsive"/>
+								<img src="images/itemnumber_trans.png" class="itemnumber-image img-responsive"/>
                             </div>
 							<div class="col-md-12 text-center center-block">
 								<button type="button" class="fcbtn btn btn-outline btn-primary btn-1c" data-dismiss="modal" style="margin-bottom:20px;">Cancel</button>
